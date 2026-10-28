@@ -27,7 +27,7 @@ PC-Performance-Predictor is a Flask-based web application that uses machine lear
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/aliosama/PC-Performance-Predictor.git
+git clone https://github.com/ayamouner60-x/pc_performance_predictor.git
 cd PC-Performance-Predictor
 ```
 
