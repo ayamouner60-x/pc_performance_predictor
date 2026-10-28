@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}FPS Predictor - Hardware Performance Analyzer {% endblock %}
+{% block content %}
+
+<section class="relative flex flex-col items-center text-center py-16 px-5 z-10">
+  <div class="relative z-10">
+    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-widest uppercase" data-aos="zoom-out"
+      data-aos-duration="1000">
+      Hardware Performance
+    </h1>
+    <p class="text-textMuted max-w-lg mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="300"
+      data-aos-duration="1000">
+      AI-powered system to analyze your hardware specifications and predict
+      Frames Per Second (FPS) with high accuracy.
+    </p>
+  </div>
+</section>
+
+<section class="pb-16 px-6 md:px-16 flex flex-col items-center relative z-10 overflow-visible">
+  <div class="text-center mb-10 relative w-full" data-aos="fade-up">
+    <h2
+      class="text-5xl md:text-7xl font-black text-white opacity-5 uppercase tracking-[0.3em] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full whitespace-nowrap">
+      PREDICTION
+    </h2>
+    <h3 class="text-xl font-bold relative z-10">ENTER YOUR SPECS</h3>
+  </div>
+
+  <div class="w-full max-w-4xl flex flex-col gap-10">
+    <!-- Grid 1: GPU & CPU -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16">
+      <div class="relative bg-cardBg rounded-[2.5rem] p-8 pt-24 flex flex-col items-center shadow-2xl"
+        data-aos="fade-up" data-aos-delay="100">
+        <img src="https://img.icons8.com/nolan/512/nvidia-geforce.png" alt=""
+          class="absolute -top-20 w-44 h-44 drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] hover:-translate-y-3 transition-transform duration-500 cursor-pointer" />
+        <label for="gpuInput" class="text-sm text-textMuted font-bold uppercase tracking-widest mb-4">Graphics Card</label>
+        <select id="gpuInput"
+          class="w-full p-4 bg-inputBg rounded-xl text-center text-white font-bold focus:outline-none focus:ring-2 focus:ring-accentBlue transition duration-300 shadow-inner appearance-none cursor-pointer">
+          <option value="">Select a GPU...</option>
+        </select>
+      </div>
+
+      <div class="relative bg-cardBg rounded-[2.5rem] p-8 pt-24 flex flex-col items-center shadow-2xl"
+        data-aos="fade-up" data-aos-delay="200">
+        <img src="https://img.icons8.com/nolan/512/ryzen-controller--v1.png" alt=""
+          class="absolute -top-20 w-44 h-44 drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] hover:-translate-y-3 transition-transform duration-500 cursor-pointer" />
+        <label for="cpuInput" class="text-sm text-textMuted font-bold uppercase tracking-widest mb-4">Processor</label>
+        <select id="cpuInput"
+          class="w-full p-4 bg-inputBg rounded-xl text-center text-white font-bold focus:outline-none focus:ring-2 focus:ring-accentBlue transition duration-300 shadow-inner appearance-none cursor-pointer">
+          <option value="">Select a CPU...</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grid 2: Game & Settings -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+      <div class="relative bg-cardBg rounded-[2.5rem] p-8 pt-24 flex flex-col items-center shadow-2xl"
+        data-aos="fade-up" data-aos-delay="300">
+        <img src="https://img.icons8.com/nolan/512/steam--v2.png" alt=""
+          class="absolute -top-20 w-44 h-44 drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] hover:-translate-y-3 transition-transform duration-500 cursor-pointer" />
+        <label for="gameInput" class="text-sm text-textMuted font-bold uppercase tracking-widest mb-4">Game Name</label>
+        <select id="gameInput"
+          class="w-full p-4 bg-inputBg rounded-xl text-center text-white font-bold focus:outline-none focus:ring-2 focus:ring-accentBlue transition duration-300 shadow-inner appearance-none cursor-pointer">
+          <option value="">Select a game...</option>
+        </select>
+      </div>
+
+      <div class="relative bg-cardBg rounded-[2.5rem] p-8 pt-24 flex flex-col items-center shadow-2xl"
+        data-aos="fade-up" data-aos-delay="400">
+        <img src="https://img.icons8.com/nolan/512/settings--v1.png" alt=""
+          class="absolute -top-20 w-44 h-44 drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] hover:-translate-y-3 transition-transform duration-500 cursor-pointer" />
+        <label for="settingsInput" class="text-sm text-textMuted font-bold uppercase tracking-widest mb-4">Game Setting</label>
+        <select id="settingsInput"
+          class="w-full p-4 bg-inputBg rounded-xl text-center text-white font-bold focus:outline-none focus:ring-2 focus:ring-accentBlue transition duration-300 shadow-inner appearance-none cursor-pointer">
+          <option value="">Select a setting...</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- AI Engine Selection (Centered) -->
+    <div class="flex justify-center mt-10">
+      <div class="relative bg-cardBg rounded-[2.5rem] p-8 pt-24 flex flex-col items-center shadow-2xl w-full md:w-1/2"
+        data-aos="fade-up" data-aos-delay="450">
+        <img src="https://img.icons8.com/nolan/512/artificial-intelligence.png" alt="" 
+          class="absolute -top-20 w-44 h-44 drop-shadow-[0_20px_20px_rgba(0,0,0,0.6)] hover:-translate-y-3 transition-transform duration-500 cursor-pointer" />
+        <label for="modelInput" class="text-sm text-textMuted font-bold uppercase tracking-widest mb-4">AI Prediction Engine</label>
+        <select id="modelInput"
+          class="w-full p-4 bg-inputBg rounded-xl text-center text-white font-bold focus:outline-none focus:ring-2 focus:ring-accentBlue transition duration-300 shadow-inner appearance-none cursor-pointer">
+          <option value="XGB">XGBoost (High Accuracy)</option>
+          <option value="RF">Random Forest</option>
+          <option value="LR">Linear Regression</option>
+        </select>
+      </div>
+    </div>
+
+    <button onclick="predictFPS()" data-aos="zoom-in" data-aos-delay="500"
+      class="group relative w-full mt-8 p-5 bg-transparent text-accentBlue font-black rounded-xl uppercase tracking-widest border-2 border-accentBlue hover:bg-accentBlue hover:text-white hover:shadow-[0_0_25px_rgba(0,168,255,0.6)] transition-all duration-300 text-lg overflow-hidden">
+      <span class="relative z-10">Predict FPS</span>
+    </button>
+  </div>
+
+
+  <div id="resultArea"
+    class="hidden mt-16 p-10 bg-secBg rounded-[2rem] w-full max-w-2xl text-center border-t-4 border-accentBlue shadow-2xl relative transition-all duration-500 transform translate-y-4 opacity-0">
+    <div class="relative z-10">
+      <h4 class="text-textMuted mb-3 uppercase font-bold text-sm tracking-widest">
+        Estimated Performance
+      </h4>
+      <div id="fpsValue" class="text-7xl font-black text-accentBlue drop-shadow-md">
+        -- FPS
+      </div>
+      <p id="systemSummary" class="text-gray-400 mt-4 text-sm font-medium"></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,142 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00a8ff;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #008ecc;
+}
+
+/* Smooth selection color */
+::selection {
+  background-color: #00a8ff;
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00a8ff;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #008ecc;
+}
+
+/* Smooth selection color */
+::selection {
+  background-color: #00a8ff;
+  color: #ffffff;
+}
+
+/* --------------------------------- */
+/* Floating Background Icons Styles  */
+/* --------------------------------- */
+
+.floating-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.25;
+}
+
+.float-icon {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  filter: drop-shadow(0 0 10px rgba(0, 168, 255, 0.4));
+}
+
+.icon-1 {
+  top: 10%;
+  left: 15%;
+  animation: floatA 20s infinite alternate ease-in-out;
+}
+.icon-2 {
+  top: 70%;
+  left: 80%;
+  animation: floatB 25s infinite alternate ease-in-out;
+}
+.icon-3 {
+  top: 40%;
+  left: 10%;
+  animation: floatC 22s infinite alternate ease-in-out;
+}
+.icon-4 {
+  top: 80%;
+  left: 20%;
+  animation: floatA 28s infinite alternate-reverse ease-in-out;
+}
+.icon-5 {
+  top: 20%;
+  left: 75%;
+  animation: floatB 24s infinite alternate-reverse ease-in-out;
+}
+.icon-6 {
+  top: 50%;
+  left: 85%;
+  animation: floatC 26s infinite alternate ease-in-out;
+}
+.icon-7 {
+  top: 60%;
+  left: 45%;
+  animation: floatA 30s infinite alternate ease-in-out;
+}
+
+@keyframes floatA {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(40px, -60px) rotate(15deg) scale(1.1);
+  }
+  100% {
+    transform: translate(-30px, 40px) rotate(-10deg) scale(0.9);
+  }
+}
+
+@keyframes floatB {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50px, 50px) rotate(-20deg) scale(0.9);
+  }
+  100% {
+    transform: translate(30px, -40px) rotate(15deg) scale(1.1);
+  }
+}
+
+@keyframes floatC {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(60px, 20px) rotate(25deg) scale(1.15);
+  }
+  100% {
+    transform: translate(-40px, -50px) rotate(-15deg) scale(0.85);
+  }
+}

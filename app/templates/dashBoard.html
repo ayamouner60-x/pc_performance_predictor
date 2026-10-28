@@ -1,0 +1,505 @@
+{% extends "base.html" %}
+{% block title %}DashBoard — FPS Analytics{% endblock %}
+
+{% block extra_css %}
+<style>
+  .stat-card {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+    border: 1px solid #333;
+    border-radius: 1.5rem;
+    padding: 1.75rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,168,255,0.06), transparent);
+    pointer-events: none;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,168,255,0.15);
+  }
+  .stat-value {
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, #00a8ff, #0077cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .chart-card {
+    background: linear-gradient(135deg, #2a2a2a 0%, #222 100%);
+    border: 1px solid #333;
+    border-radius: 1.5rem;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00a8ff, #0077cc, transparent);
+  }
+  .chart-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    margin-bottom: 0.25rem;
+  }
+  .chart-subtitle {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+  }
+  .section-header {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #00a8ff;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 9999px;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .badge-blue  { background: rgba(0,168,255,0.15); color: #00a8ff; border: 1px solid rgba(0,168,255,0.3); }
+  .badge-green { background: rgba(0,220,130,0.12); color: #00dc82; border: 1px solid rgba(0,220,130,0.3); }
+  .badge-amber { background: rgba(255,180,0,0.12); color: #ffb400; border: 1px solid rgba(255,180,0,0.3); }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Page hero -->
+<section class="relative z-10 px-6 md:px-16 pt-6 pb-10">
+  <div data-aos="fade-up" data-aos-duration="700">
+    <p class="section-header">Analytics Center</p>
+    <h1 class="text-3xl md:text-4xl font-black text-white mb-1">
+      Performance <span class="text-accentBlue">Dashboard</span>
+    </h1>
+    <p class="text-textMuted text-sm">Insights from <span class="text-white font-bold">24,624</span> benchmark records across hardware & games.</p>
+  </div>
+</section>
+
+<!-- ── KPI Cards ─────────────────────────────────────── -->
+<section class="relative z-10 px-6 md:px-16 pb-12">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+    <div class="stat-card" data-aos="fade-up" data-aos-delay="50">
+      <p class="text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Avg FPS</p>
+      <p class="stat-value">124</p>
+      <p class="text-xs text-textMuted mt-2 font-semibold">across all benchmarks</p>
+      <span class="badge badge-blue mt-3">Frames / sec</span>
+    </div>
+
+    <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+      <p class="text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Peak FPS</p>
+      <p class="stat-value">396</p>
+      <p class="text-xs text-textMuted mt-2 font-semibold">RTX 2080 Ti · CS:GO</p>
+      <span class="badge badge-green mt-3">Record high</span>
+    </div>
+
+    <div class="stat-card" data-aos="fade-up" data-aos-delay="150">
+      <p class="text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Hardware</p>
+      <p class="stat-value">46</p>
+      <p class="text-xs text-textMuted mt-2 font-semibold">19 CPUs · 27 GPUs</p>
+      <span class="badge badge-blue mt-3">Combinations</span>
+    </div>
+
+    <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+      <p class="text-xs font-bold uppercase tracking-widest text-textMuted mb-2">Games</p>
+      <p class="stat-value">24</p>
+      <p class="text-xs text-textMuted mt-2 font-semibold">med &amp; max settings</p>
+      <span class="badge badge-amber mt-3">Titles tested</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Row 1: GPU Leaderboard + Game FPS ─────────────── -->
+<section class="relative z-10 px-6 md:px-16 pb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- GPU Leaderboard -->
+    <div class="chart-card" data-aos="fade-right" data-aos-duration="800">
+      <p class="chart-title">GPU Performance</p>
+      <p class="chart-subtitle">Top 10 GPUs by Average FPS</p>
+      <div style="position:relative;height:340px;">
+        <canvas id="gpuChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Game FPS -->
+    <div class="chart-card" data-aos="fade-left" data-aos-duration="800">
+      <p class="chart-title">Game Benchmarks</p>
+      <p class="chart-subtitle">Average FPS per Game</p>
+      <div style="position:relative;height:340px;">
+        <canvas id="gameChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Row 2: CPU Leaderboard + Architecture ─────────── -->
+<section class="relative z-10 px-6 md:px-16 pb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- CPU Leaderboard -->
+    <div class="chart-card" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
+      <p class="chart-title">CPU Performance</p>
+      <p class="chart-subtitle">Top 10 CPUs by Average FPS</p>
+      <div style="position:relative;height:320px;">
+        <canvas id="cpuChart"></canvas>
+      </div>
+    </div>
+
+    <!-- GPU Architecture Radar -->
+    <div class="chart-card" data-aos="fade-left" data-aos-duration="800" data-aos-delay="100">
+      <p class="chart-title">GPU Architecture</p>
+      <p class="chart-subtitle">Average FPS by Architecture</p>
+      <div style="position:relative;height:320px;">
+        <canvas id="archChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Row 3: Settings + FPS Distribution ────────────── -->
+<section class="relative z-10 px-6 md:px-16 pb-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- Med vs Max -->
+    <div class="chart-card" data-aos="fade-up" data-aos-delay="50">
+      <p class="chart-title">Quality Settings</p>
+      <p class="chart-subtitle">Med vs Max FPS Impact</p>
+      <div style="position:relative;height:260px;">
+        <canvas id="settingsChart"></canvas>
+      </div>
+    </div>
+
+    <!-- FPS Distribution -->
+    <div class="chart-card md:col-span-2" data-aos="fade-up" data-aos-delay="100">
+      <p class="chart-title">FPS Distribution</p>
+      <p class="chart-subtitle">Performance range across all games</p>
+      <div style="position:relative;height:260px;">
+        <canvas id="distChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+// ── Design tokens ───────────────────────────────────────
+const BLUE   = '#00a8ff';
+const BLUE20 = 'rgba(0,168,255,0.18)';
+const BLUE60 = 'rgba(0,168,255,0.7)';
+const GRID   = 'rgba(255,255,255,0.06)';
+const TEXT   = '#8a8a8a';
+
+Chart.defaults.color = TEXT;
+Chart.defaults.font.family = 'Montserrat, sans-serif';
+Chart.defaults.font.size   = 11;
+
+const palette = [
+  '#00a8ff','#0077cc','#00dc82','#ffb400',
+  '#ff4d6d','#a855f7','#fb923c','#22d3ee',
+  '#86efac','#fbbf24'
+];
+
+// ── Shared options helpers ──────────────────────────────
+function baseBarOpts(indexAxis = 'y') {
+  return {
+    indexAxis,
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1e1e1e',
+        borderColor: '#333',
+        borderWidth: 1,
+        titleColor: '#fff',
+        bodyColor: '#8a8a8a',
+        callbacks: {
+          label: ctx => ` ${ctx.parsed[indexAxis === 'y' ? 'x' : 'y'].toFixed(1)} FPS`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: GRID }, ticks: { color: TEXT } },
+      y: { grid: { color: GRID }, ticks: { color: TEXT } }
+    }
+  };
+}
+
+// ── 1. GPU Leaderboard ──────────────────────────────────
+const gpuLabels = [
+  'RTX 2080 Ti','RTX 2080','GTX 1080 Ti','GTX TITAN X',
+  'RTX 2070 S','RTX 2070','GTX 1080','RX 5700 XT',
+  'RTX 2060 S','RX 5700'
+];
+const gpuData = [176.2,153.3,149.2,148.0,146.9,142.4,141.4,139.0,137.8,135.5];
+
+new Chart(document.getElementById('gpuChart'), {
+  type: 'bar',
+  data: {
+    labels: gpuLabels,
+    datasets: [{
+      data: gpuData,
+      backgroundColor: gpuData.map((_, i) =>
+        i === 0 ? BLUE60 : 'rgba(0,168,255,0.25)'),
+      borderColor: gpuData.map((_, i) =>
+        i === 0 ? BLUE : 'rgba(0,168,255,0.5)'),
+      borderWidth: 1.5,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    ...baseBarOpts('y'),
+    scales: {
+      x: {
+        grid: { color: GRID },
+        ticks: { color: TEXT },
+        min: 100,
+      },
+      y: { grid: { color: 'transparent' }, ticks: { color: '#ccc', font: { size: 10 } } }
+    }
+  }
+});
+
+// ── 2. Game FPS ─────────────────────────────────────────
+const gameLabels = [
+  'CS:GO','LoL','Warframe','Dota 2','Overwatch',
+  'Path of Exile','StarCraft 2','CoD WW2','A Way Out','Sea of Thieves',
+  'Frostpunk','Fortnite','AirMech','Destiny 2','Far Cry 5',
+  'Apex','R6 Siege','Radical Heights','BattleTech','GTA 5',
+  'PUBG','Total War','World of Tanks','Battlefield 4'
+];
+const gameData = [
+  241.0,217.5,166.1,159.8,155.3,152.5,145.3,137.2,132.9,128.2,
+  127.2,125.5,124.5,118.3,103.8, 99.3, 95.7, 91.1, 83.0, 82.1,
+   81.2, 74.9, 67.7, 65.0
+];
+
+new Chart(document.getElementById('gameChart'), {
+  type: 'bar',
+  data: {
+    labels: gameLabels,
+    datasets: [{
+      data: gameData,
+      backgroundColor: gameData.map(v =>
+        v > 200 ? 'rgba(0,220,130,0.55)' :
+        v > 120 ? 'rgba(0,168,255,0.4)'  :
+                  'rgba(255,75,109,0.4)'),
+      borderColor: gameData.map(v =>
+        v > 200 ? '#00dc82' :
+        v > 120 ? BLUE       :
+                  '#ff4d6d'),
+      borderWidth: 1.5,
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    ...baseBarOpts('y'),
+    scales: {
+      x: { grid: { color: GRID }, ticks: { color: TEXT }, min: 0 },
+      y: { grid: { color: 'transparent' }, ticks: { color: '#ccc', font: { size: 9 } } }
+    }
+  }
+});
+
+// ── 3. CPU Leaderboard ──────────────────────────────────
+const cpuLabels = [
+  'i9-9900K','i7-9700K','R9 3900X','R7 3800X','R7 3700X',
+  'R5 3600X','i7-8700K','R5 3600','i7-7700K','i5-9400F'
+];
+const cpuData = [141.0,139.7,134.7,133.4,131.5,130.9,129.7,127.1,125.9,124.6];
+
+new Chart(document.getElementById('cpuChart'), {
+  type: 'bar',
+  data: {
+    labels: cpuLabels,
+    datasets: [{
+      data: cpuData,
+      backgroundColor: palette.map(c => c + '44'),
+      borderColor: palette,
+      borderWidth: 1.5,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    ...baseBarOpts('x'),
+    scales: {
+      x: { grid: { color: 'transparent' }, ticks: { color: '#ccc', font: { size: 9.5 } } },
+      y: { grid: { color: GRID }, ticks: { color: TEXT }, min: 100 }
+    }
+  }
+});
+
+// ── 4. GPU Architecture Radar ───────────────────────────
+const archLabels  = ['Turing','RDNA 1.0','GCN 5.0','Maxwell 2.0','Pascal','GCN 4.0'];
+const archData    = [139.5, 137.2, 133.1, 119.2, 114.7, 96.4];
+
+new Chart(document.getElementById('archChart'), {
+  type: 'radar',
+  data: {
+    labels: archLabels,
+    datasets: [{
+      label: 'Avg FPS',
+      data: archData,
+      backgroundColor: 'rgba(0,168,255,0.15)',
+      borderColor: BLUE,
+      borderWidth: 2,
+      pointBackgroundColor: BLUE,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1e1e1e',
+        borderColor: '#333',
+        borderWidth: 1,
+        titleColor: '#fff',
+        bodyColor: '#8a8a8a',
+        callbacks: { label: ctx => ` ${ctx.raw.toFixed(1)} FPS` }
+      }
+    },
+    scales: {
+      r: {
+        min: 80,
+        grid:       { color: GRID },
+        angleLines: { color: GRID },
+        ticks: { backdropColor: 'transparent', color: TEXT, font: { size: 10 } },
+        pointLabels: { color: '#ccc', font: { size: 10.5, weight: 'bold' } }
+      }
+    }
+  }
+});
+
+// ── 5. Settings Doughnut ────────────────────────────────
+new Chart(document.getElementById('settingsChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Medium Settings', 'Max Settings'],
+    datasets: [{
+      data: [139.8, 108.1],
+      backgroundColor: ['rgba(0,168,255,0.7)', 'rgba(255,75,109,0.7)'],
+      borderColor:     ['#00a8ff', '#ff4d6d'],
+      borderWidth: 2,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: '#ccc',
+          padding: 16,
+          font: { size: 11, weight: 'bold' },
+          usePointStyle: true,
+          pointStyleWidth: 8,
+        }
+      },
+      tooltip: {
+        backgroundColor: '#1e1e1e',
+        borderColor: '#333',
+        borderWidth: 1,
+        titleColor: '#fff',
+        bodyColor: '#8a8a8a',
+        callbacks: { label: ctx => ` ${ctx.raw.toFixed(1)} avg FPS` }
+      }
+    }
+  }
+});
+
+// ── 6. FPS Distribution (histogram-style line) ──────────
+const buckets = [
+  '20-40','40-60','60-80','80-100','100-120','120-140',
+  '140-160','160-180','180-200','200-220','220-240','240+'
+];
+const counts = [120,310,890,1850,3100,4200,4600,3800,2700,1700,980,374];
+
+new Chart(document.getElementById('distChart'), {
+  type: 'line',
+  data: {
+    labels: buckets,
+    datasets: [{
+      label: 'Benchmark Count',
+      data: counts,
+      fill: true,
+      backgroundColor: 'rgba(0,168,255,0.10)',
+      borderColor: BLUE,
+      borderWidth: 2.5,
+      pointBackgroundColor: BLUE,
+      pointRadius: 4,
+      pointHoverRadius: 7,
+      tension: 0.45,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1e1e1e',
+        borderColor: '#333',
+        borderWidth: 1,
+        titleColor: '#fff',
+        bodyColor: '#8a8a8a',
+        callbacks: {
+          title: ctx => `FPS Range: ${ctx[0].label}`,
+          label: ctx => ` ${ctx.parsed.y.toLocaleString()} benchmarks`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: GRID }, ticks: { color: TEXT } },
+      y: {
+        grid: { color: GRID },
+        ticks: { color: TEXT },
+        title: { display: true, text: 'Benchmark Count', color: TEXT, font: { size: 10 } }
+      }
+    }
+  }
+});
+</script>
+{% endblock %}
