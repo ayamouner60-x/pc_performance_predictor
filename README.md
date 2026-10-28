@@ -1,45 +1,45 @@
-# PC-Performance-Predictor
+# pc_performance_predictor
 
 An AI-powered system to analyze hardware specifications and predict gaming performance (FPS) with high accuracy.
 
 ## 📋 Overview
 
-PC-Performance-Predictor is a Flask-based web application that uses machine learning to predict Frames Per Second (FPS) for games based on hardware specifications. Simply input your CPU, GPU, game name, and graphics settings to get an accurate FPS prediction.
+pc_performance_predictor is a Flask-based web application that uses machine learning to predict Frames Per Second (FPS) for games based on hardware specifications. Simply input your CPU, GPU, game name, and graphics settings to get an accurate FPS prediction.
 
 ## ✨ Features
 
-- **AI-Powered Predictions**: Machine learning model trained on real gaming data
-- **Hardware Database**: Comprehensive database of CPU and GPU specifications
-- **Beautiful UI**: Modern, responsive interface with smooth animations
-- **Real-time API**: RESTful API for programmatic access
-- **Data Processing**: Automated data cleaning and preprocessing pipeline
-- **Model Training**: Jupyter notebooks for model exploration and training
+* AI-Powered Predictions: Machine learning model trained on real gaming data
+* Hardware Database: Comprehensive database of CPU and GPU specifications
+* Beautiful UI: Modern, responsive interface with smooth animations
+* Real-time API: RESTful API for programmatic access
+* Data Processing: Automated data cleaning and preprocessing pipeline
+* Model Training: Jupyter notebooks for model exploration and training
 
 ## 🚀 Installation
 
 ### Prerequisites
 
-- Python 3.8+
-- pip or conda
+* Python 3.8+
+* pip or conda
 
 ### Setup
 
 1. Clone the repository:
 
-```bash
+```
 git clone https://github.com/ayamouner60-x/pc_performance_predictor.git
-cd PC-Performance-Predictor
+cd pc_performance_predictor
 ```
 
 2. Install dependencies:
 
-```bash
+```
 pip install -r requirements.txt
 ```
 
 3. Run the application:
 
-```bash
+```
 python run.py
 ```
 
@@ -48,7 +48,7 @@ The application will be available at `http://localhost:5000`
 ## 📁 Project Structure
 
 ```
-PC-Performance-Predictor/
+pc_performance_predictor/
 ├── app/
 │   ├── ml/                 # Machine learning models and training
 │   │   ├── predictor.py    # Prediction logic
@@ -84,11 +84,11 @@ PC-Performance-Predictor/
 
 ### Predict FPS Endpoint
 
-**POST** `/api/predict`
+POST `/api/predict`
 
 Request body:
 
-```json
+```
 {
   "CpuName": "Intel Core i9-9900K",
   "GpuName": "NVIDIA GeForce RTX 2080 Ti",
@@ -99,7 +99,7 @@ Request body:
 
 Response:
 
-```json
+```
 {
   "success": true,
   "fps": 85.5
@@ -108,7 +108,7 @@ Response:
 
 Error response:
 
-```json
+```
 {
   "success": false,
   "error": "Hardware not found"
@@ -119,8 +119,8 @@ Error response:
 
 The project includes:
 
-- **FPS_Games.csv**: Raw gaming performance dataset
-- **FPS_Games_Processed.csv**: Cleaned and processed dataset
+* FPS_Games.csv: Raw gaming performance dataset
+* FPS_Games_Processed.csv: Cleaned and processed dataset
 
 See `notebooks/` for data exploration and model training workflows.
 
@@ -128,9 +128,9 @@ See `notebooks/` for data exploration and model training workflows.
 
 Edit `config.py` to customize:
 
-- Database settings
-- Model parameters
-- API configuration
+* Database settings
+* Model parameters
+* API configuration
 
 ## 👤 Author
 
