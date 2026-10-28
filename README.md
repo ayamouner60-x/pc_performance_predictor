@@ -134,7 +134,7 @@ Edit `config.py` to customize:
 
 ## 👤 Author
 
-Created by Ali Osama
+Created by Aya moner
 
 ## 🤝 Contributing
 
